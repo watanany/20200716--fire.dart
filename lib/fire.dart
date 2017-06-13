@@ -28,8 +28,8 @@ class Fire {
 
     for (int i = 0; i < 10; i++) {
       final ball = new Ball(
-          x: mouseX,
-          y: mouseY,
+          x: mouseX.toDouble(),
+          y: mouseY.toDouble(),
           vx: random.nextDouble() * 10 - 5,
           vy: random.nextDouble() * 10 - 7,
           size: random.nextDouble() * 35 + 10,
