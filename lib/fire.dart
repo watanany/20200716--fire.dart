@@ -60,7 +60,7 @@ class Fire {
         gradblur.addColorStop(0, edgecolor0);
         gradblur.addColorStop(1, edgecolor1);
         context.fillStyle = gradblur;
-        context.arc(ball.x, ball.y, ball.size, 0, PI, false);
+        context.arc(ball.x, ball.y, ball.size, 0, PI * 2, false);
         context.fill();
       }
     }
