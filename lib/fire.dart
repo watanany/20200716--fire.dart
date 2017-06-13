@@ -42,11 +42,12 @@ class Fire {
 
     for (var i = balls.length - 1; 0 <= i; i--) {
       final ball = balls[i];
-      ball.x += ball.vx;
-      ball.y += ball.vy;
-      ball.vy -= 0.4;
-      ball.vx += (ball.cx - ball.x) / ball.size * 0.5;
-      ball.size -= 1.3;
+      ball
+        ..x += ball.vx
+        ..y += ball.vy
+        ..vy -= 0.4
+        ..vx += (ball.cx - ball.x) / ball.size * 0.5
+        ..size -= 1.3;
 
       if (ball.size < 1.0) {
         balls.removeAt(i);
