@@ -58,16 +58,17 @@ class Fire {
     context.globalCompositeOperation = 'lighter';
 
     for (final ball in balls) {
-      context.beginPath();
-      final edgecolor0 =
-          "rgba(${ball.r}, ${ball.g}, ${ball.b}, ${ball.size / 20})";
-      final edgecolor1 = "rgba(${ball.r}, ${ball.g}, ${ball.b}, 0)";
       final gradblur = context.createRadialGradient(
           ball.x, ball.y, 0, ball.x, ball.y, ball.size);
-      gradblur.addColorStop(0, edgecolor0);
-      gradblur.addColorStop(1, edgecolor1);
-      context.fillStyle = gradblur;
+      gradblur.addColorStop(
+          0, "rgba(${ball.r}, ${ball.g}, ${ball.b}, ${ball.size / 20})");
+      gradblur.addColorStop(1, "rgba(${ball.r}, ${ball.g}, ${ball.b}, 0)");
+
+      context.beginPath();
       context.arc(ball.x, ball.y, ball.size, 0, PI * 2, false);
+      context.closePath();
+
+      context.fillStyle = gradblur;
       context.fill();
     }
   }
