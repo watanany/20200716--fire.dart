@@ -21,7 +21,7 @@ class Fire {
   void draw() {
     // create new balls
     final newBalls = new List<Ball>.generate(10, (i) {
-      new Ball(
+      return new Ball(
           x: mouseX.toDouble(),
           y: mouseY.toDouble(),
           vx: random.nextDouble() * 10 - 5,
