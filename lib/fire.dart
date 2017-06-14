@@ -20,8 +20,8 @@ class Fire {
 
   void draw() {
     // create new balls
-    for (int i = 0; i < 10; i++) {
-      final ball = new Ball(
+    final newBalls = new List<Ball>.generate(10, (i) {
+      new Ball(
           x: mouseX.toDouble(),
           y: mouseY.toDouble(),
           vx: random.nextDouble() * 10 - 5,
@@ -31,8 +31,9 @@ class Fire {
           g: (random.nextDouble() * 255 * 0.5).floor(),
           b: (random.nextDouble() * 255 * 0.5).floor(),
           cx: mouseX);
-      balls.add(ball);
-    }
+    });
+
+    balls.addAll(newBalls);
 
     // update balls
     for (final ball in balls) {
