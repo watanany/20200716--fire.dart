@@ -4,31 +4,27 @@ import 'package:fire/ball.dart';
 
 class Fire {
   final Random random = new Random();
-  final List<Ball> balls = [];
   final CanvasRenderingContext2D context;
-  int mouseX = 232;
-  int mouseY = 232;
+  final List<Ball> balls = [];
+  var mouse = new Point(232, 232);
 
   Fire(CanvasElement canvas) : context = canvas.context2D {
-    canvas.onMouseMove.listen((e) {
-      mouseX = e.client.x;
-      mouseY = e.client.y;
-    });
+    canvas.onMouseMove.listen((e) => mouse = e.client);
   }
 
   void draw() {
     // create new balls
     final newBalls = new List<Ball>.generate(10, (i) {
       return new Ball(
-          x: mouseX.toDouble(),
-          y: mouseY.toDouble(),
+          x: mouse.x.toDouble(),
+          y: mouse.y.toDouble(),
           vx: random.nextDouble() * 10 - 5,
           vy: random.nextDouble() * 10 - 7,
           size: random.nextDouble() * 35 + 10,
           r: (random.nextDouble() * 128 + 127).floor(),
           g: (random.nextDouble() * 255 * 0.5).floor(),
           b: (random.nextDouble() * 255 * 0.5).floor(),
-          cx: mouseX);
+          cx: mouse.x);
     });
 
     balls.addAll(newBalls);
