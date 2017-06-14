@@ -66,8 +66,6 @@ class Fire {
 
       context.beginPath();
       context.arc(ball.x, ball.y, ball.size, 0, PI * 2, false);
-      context.closePath();
-
       context.fillStyle = gradblur;
       context.fill();
     }
