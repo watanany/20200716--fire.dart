@@ -1,5 +1,5 @@
 class Ball {
-  int r, g, b, cx;
+  final int r, g, b, cx;
   double x, y, vx, vy, size;
 
   Ball(

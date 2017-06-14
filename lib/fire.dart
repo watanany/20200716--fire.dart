@@ -3,29 +3,23 @@ import 'dart:math';
 import 'package:fire/ball.dart';
 
 class Fire {
-  Random random;
-  CanvasRenderingContext2D context;
+  final Random random;
+  final List<Ball> balls = [];
   int mouseX = 232;
   int mouseY = 232;
-  List<Ball> balls = [];
+  CanvasRenderingContext2D context;
 
-  Fire() {
+  Fire() : random = new Random() {
     final CanvasElement canvas = document.querySelector('canvas');
     canvas.onMouseMove.listen((e) {
       mouseX = e.client.x;
       mouseY = e.client.y;
     });
     context = canvas.context2D;
-    random = new Random();
   }
 
   void draw() {
-    context.globalCompositeOperation = 'source-over';
-    context.fillStyle = 'rgb(0, 0, 0)';
-    context.fillRect(0, 0, 500, 500);
-
-    context.globalCompositeOperation = 'lighter';
-
+    // create new balls
     for (int i = 0; i < 10; i++) {
       final ball = new Ball(
           x: mouseX.toDouble(),
@@ -40,30 +34,39 @@ class Fire {
       balls.add(ball);
     }
 
-    for (var i = balls.length - 1; 0 <= i; i--) {
-      final ball = balls[i];
+    // update balls
+    for (final ball in balls) {
       ball
         ..x += ball.vx
         ..y += ball.vy
         ..vy -= 0.4
         ..vx += (ball.cx - ball.x) / ball.size * 0.5
         ..size -= 1.3;
+    }
 
-      if (ball.size < 1.0) {
-        balls.removeAt(i);
-      } else {
-        context.beginPath();
-        final edgecolor0 =
-            "rgba(${ball.r}, ${ball.g}, ${ball.b}, ${ball.size / 20})";
-        final edgecolor1 = "rgba(${ball.r}, ${ball.g}, ${ball.b}, 0)";
-        final gradblur = context.createRadialGradient(
-            ball.x, ball.y, 0, ball.x, ball.y, ball.size);
-        gradblur.addColorStop(0, edgecolor0);
-        gradblur.addColorStop(1, edgecolor1);
-        context.fillStyle = gradblur;
-        context.arc(ball.x, ball.y, ball.size, 0, PI * 2, false);
-        context.fill();
-      }
+    // remove balls
+    balls.removeWhere((ball) => ball.size < 1.0);
+
+    // fill canvas with a color
+    context.globalCompositeOperation = 'source-over';
+    context.fillStyle = 'rgb(0, 0, 0)';
+    context.fillRect(0, 0, 500, 500);
+
+    // draw balls
+    context.globalCompositeOperation = 'lighter';
+
+    for (final ball in balls) {
+      context.beginPath();
+      final edgecolor0 =
+          "rgba(${ball.r}, ${ball.g}, ${ball.b}, ${ball.size / 20})";
+      final edgecolor1 = "rgba(${ball.r}, ${ball.g}, ${ball.b}, 0)";
+      final gradblur = context.createRadialGradient(
+          ball.x, ball.y, 0, ball.x, ball.y, ball.size);
+      gradblur.addColorStop(0, edgecolor0);
+      gradblur.addColorStop(1, edgecolor1);
+      context.fillStyle = gradblur;
+      context.arc(ball.x, ball.y, ball.size, 0, PI * 2, false);
+      context.fill();
     }
   }
 }
