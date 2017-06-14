@@ -12,7 +12,12 @@ class Fire {
     canvas.onMouseMove.listen((e) => mouse = e.client);
   }
 
-  void draw() {
+  void update() {
+    _updateBalls();
+    _updateCanvas();
+  }
+
+  void _updateBalls() {
     // create new balls
     final newBalls = new List<Ball>.generate(10, (i) {
       return new Ball(
@@ -41,7 +46,9 @@ class Fire {
 
     // remove balls
     balls.removeWhere((ball) => ball.size < 1.0);
+  }
 
+  void _updateCanvas() {
     // fill canvas with a color
     context.globalCompositeOperation = 'source-over';
     context.fillStyle = 'rgb(0, 0, 0)';
