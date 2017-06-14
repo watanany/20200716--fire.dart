@@ -3,13 +3,13 @@ import 'dart:math';
 import 'package:fire/ball.dart';
 
 class Fire {
-  final Random random;
+  final Random random = new Random();
   final List<Ball> balls = [];
   int mouseX = 232;
   int mouseY = 232;
   CanvasRenderingContext2D context;
 
-  Fire() : random = new Random() {
+  Fire() {
     final CanvasElement canvas = document.querySelector('canvas');
     canvas.onMouseMove.listen((e) {
       mouseX = e.client.x;
