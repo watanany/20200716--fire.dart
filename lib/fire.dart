@@ -5,17 +5,15 @@ import 'package:fire/ball.dart';
 class Fire {
   final Random random = new Random();
   final List<Ball> balls = [];
+  final CanvasRenderingContext2D context;
   int mouseX = 232;
   int mouseY = 232;
-  CanvasRenderingContext2D context;
 
-  Fire() {
-    final CanvasElement canvas = document.querySelector('canvas');
+  Fire(CanvasElement canvas) : context = canvas.context2D {
     canvas.onMouseMove.listen((e) {
       mouseX = e.client.x;
       mouseY = e.client.y;
     });
-    context = canvas.context2D;
   }
 
   void draw() {
