@@ -19,7 +19,7 @@ class Fire {
 
   void _updateBalls() {
     // create new balls
-    final newBalls = new List<Ball>.generate(10, (i) {
+    final newBalls = new List<Ball>.generate(10, (_i) {
       return new Ball(
           x: mouse.x.toDouble(),
           y: mouse.y.toDouble(),
